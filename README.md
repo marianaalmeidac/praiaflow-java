@@ -3,7 +3,6 @@
 Projeto desenvolvido em Java com o objetivo de simular um sistema de gerenciamento de comandas em ambientes de praia.
 
 O sistema está sendo utilizado como projeto acadêmico nas disciplinas de:
-- Programação Orientada a Objetos
 - Padrões de Projeto
 - Análise de Sistemas
 
