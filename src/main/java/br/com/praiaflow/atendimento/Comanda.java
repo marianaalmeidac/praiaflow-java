@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+//Responsabilidade: Controlar o atendimento geral da mesa/comanda.
 public class Comanda {
 
     private Long id;

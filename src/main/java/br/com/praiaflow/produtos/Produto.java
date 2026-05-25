@@ -2,11 +2,15 @@ package br.com.praiaflow.produtos;
 import br.com.praiaflow.enums.CategoriaProduto;
 import java.math.BigDecimal;
 
+
+//abstração comercial
 public abstract class Produto {
+    //Abstract: Produto não poderá existir sozinho = new Produto() NÃO PODE!
+    //Produto virou conceito base do domínio.
 
     private Long id;
     private String nome;
-    private BigDecimal preco;
+    private BigDecimal precoBase;
     private CategoriaProduto categoria;
     private Boolean ativo;
     private String descricao;
@@ -35,12 +39,12 @@ public abstract class Produto {
         this.categoria = categoria;
     }
 
-    public BigDecimal getPreco() {
-        return preco;
+    public BigDecimal getPrecoBase() {
+        return precoBase;
     }
 
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
+    public void setPrecoBase(BigDecimal preco) {
+        this.precoBase = preco;
     }
 
     public String getNome() {

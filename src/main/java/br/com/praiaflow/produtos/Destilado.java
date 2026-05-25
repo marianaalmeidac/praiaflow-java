@@ -1,7 +1,14 @@
 package br.com.praiaflow.produtos;
 
-public class Destilado extends Produto {
+import br.com.praiaflow.enums.TipoDestilado;
 
-    private Integer ml;
-    private String marca;
+import java.math.BigDecimal;
+
+public class Destilado {
+
+    private Long id;
+    private String nome;
+    private TipoDestilado tipo;
+    private BigDecimal preco;
+    private Boolean ativo;
 }
