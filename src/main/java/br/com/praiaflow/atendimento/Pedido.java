@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//Responsabilidade:Controlar a rodada operacional de consumo.
+//Responsabilidade:Controlar a rodada operacional de consumo. - AGRUPADOR
 public class Pedido {
 
     private Long id;
@@ -24,18 +24,18 @@ public class Pedido {
     public void fechar() {
 
         if (this.status == StatusPedido.CONCLUIDO) {
-            throw  new RuntimeException(
+            throw new RuntimeException(
                     "O pedido já está concluído."
             );
         }
 
         if (this.itens.isEmpty()) {       //-essa regra protege o pedido vazio, evitando inconsistência, operação inválida e rodada fantasma
-            throw new RuntimeException(   //-Pedido protege sua própria integridade
+            throw new RuntimeException(   //-Pedido protege sua própria integridade - encapsulamento
                     "Não é possível concluir um pedido sem itens."
             );
         }
 
-        this.status = StatusPedido.CONCLUIDO;
+        this.status = StatusPedido.CONCLUIDO;  //o comportamento vai depender do estado.
 
     }
 
@@ -52,19 +52,21 @@ public class Pedido {
     }
 
 
-    public BigDecimal calcularTotal() {
+    public BigDecimal calcularTotal() {             //delegação de responsabilidade..
 
         BigDecimal total = BigDecimal.ZERO;
 
         for (ItemPedido itemPedido : itens) {
-                                                       //aqui rola uma delegação de responsabilidade
-            total = total.add(itemPedido.calcularTotal());
+
+            total = total.add(itemPedido.calcularTotal());  //..ele delega e apenas AGREGA resultados
 
         }
 
         return total;
     }
-
-
-
 }
+
+
+//resumo da classe: - controla entrada, regra e consistência = domínio protegido..
+//.. - soma subtotais
+//.. -

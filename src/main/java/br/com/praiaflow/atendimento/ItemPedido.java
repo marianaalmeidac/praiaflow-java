@@ -5,27 +5,15 @@ import br.com.praiaflow.produtos.Produto;
 
 import java.math.BigDecimal;
 
-//Responsabilidade: Controla financeiro individual/controle de execução.
+//Responsabilidade: Controla financeiro (EXECUÇÃO) INDIVIDUAL/controle de execução.
 public class ItemPedido {
 
     private Long idItemPedido;
     private Produto produto;
-    private Integer quantidade;
     private BigDecimal preco;
     private String observacao;
     private StatusItemPedido status;
 
-    public BigDecimal calcularTotal() {
-
-        BigDecimal total = preco.multiply(BigDecimal.valueOf(quantidade));
-
-        if (this.status == StatusItemPedido.CANCELADO) {
-
-            total = total.negate();  //Subtrai o valor do item no total do pedido.
-
-        }
-        return total;
-    }
 
     public void preparar() {
         if (this.status != StatusItemPedido.PENDENTE) {
@@ -64,19 +52,30 @@ public class ItemPedido {
         this.status = StatusItemPedido.CANCELADO;
     }
 
-    public StatusItemPedido getStatus() {
-        return status;
+    public BigDecimal calcularTotal() {
+
+        if (this.status == StatusItemPedido.CANCELADO) {
+            return this.preco.negate();
+        }
+
+        return this.preco;
     }
 
-    public void setStatus(StatusItemPedido status) {
-        this.status = status;
+    public StatusItemPedido getStatus() {
+        return status;
     }
 
     public String getObservacao() {
         return observacao;
     }
 
-    public void setObservacao(String observacao) {
+    public void setObservacao(String observacao) {      //vazio/null faz sentido - não é obrigatório
+
+        if (observacao != null && observacao.length() > 255) {  //obs != > protege o domínio contra NullPointerException
+            throw new RuntimeException(
+                    "Observação muito longa."
+            );
+        }
         this.observacao = observacao;
     }
 
@@ -84,8 +83,8 @@ public class ItemPedido {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
-        if(preco.compareTo(BigDecimal.ZERO) <= 0) {
+    public void setPreco(BigDecimal preco) {            // a regra nasceu do domínio.
+        if(preco.compareTo(BigDecimal.ZERO) < 0) {     //apenas valores negativos devem ser proibidos, zero pode ser válido
             throw new RuntimeException(
                     "Preço inválido."
             );
@@ -93,24 +92,17 @@ public class ItemPedido {
         this.preco = preco;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        if (quantidade <= 0) {
-            throw new RuntimeException(
-                    "Quantidade inválida. A quantidade deve ser maior que zero."
-            );
-        }
-        this.quantidade = quantidade;
-    }
-
     public Produto getProduto() {
         return produto;
     }
 
     public void setProduto(Produto produto) {
+
+        if (produto == null) {
+            throw new RuntimeException(
+                    "Produto deve ser informado."
+            );
+        }
         this.produto = produto;
     }
 
@@ -121,7 +113,7 @@ public class ItemPedido {
     public void setIdItemPedido(Long idItemPedido) {
         this.idItemPedido = idItemPedido;
     }
-
-
-
 }
+
+//resumo da classe: - calcula subtotal..
+//.. -

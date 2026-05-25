@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//Responsabilidade: Controlar o atendimento geral da mesa/comanda.
+//Responsabilidade: Controlar o atendimento geral da mesa/comanda - COORDENA ATENDIMENTO
 public class Comanda {
 
     private Long id;
@@ -26,7 +26,7 @@ public class Comanda {
     public void abrir() {
 
         this.status = StatusComanda.ABERTA;
-        this.dataAbertura = LocalDateTime.now();
+        this.dataAbertura = LocalDateTime.now();    //ciclo de vidaa operacional
 
     }
 
@@ -39,7 +39,7 @@ public class Comanda {
 
     public void adicionarPedido(Pedido pedido) {
 
-        if (this.status == StatusComanda.FECHADA) {
+        if (this.status == StatusComanda.FECHADA) {       //o comportamento vai depender do estado da entidade
 
             throw new RuntimeException(
                     "Não é possível adicionar pedidos a uma comanda fechada."
@@ -64,5 +64,7 @@ public class Comanda {
         return total;
 
     }
-
 }
+
+//resumo da classe: - soma pedidos..
+//..
