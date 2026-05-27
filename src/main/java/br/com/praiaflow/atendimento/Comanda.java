@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//Responsabilidade: Controlar o atendimento geral da mesa/comanda - COORDENA ATENDIMENTO
+//Responsabilidade: Controlar o atendimento/fechamento geral da mesa/comanda - COORDENA ATENDIMENTOMENTO
 public class Comanda {
 
     private Long id;
@@ -66,5 +66,8 @@ public class Comanda {
     }
 }
 
-//resumo da classe: - soma pedidos..
-//..
+//resumo da classe:
+//-soma pedidos;
+//-possui vida própria simples;
+//-não depende rigidamente dos estados dos itens;
+//-o impacto financeiro final acontece na Comanda.

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//Responsabilidade:Controlar a rodada operacional de consumo. - AGRUPADOR
+//Responsabilidade:Controlar a rodada operacional de consumo. - AGRUPADOR OPERACIONAL DE UNIDADES
 public class Pedido {
 
     private Long id;
@@ -67,6 +67,7 @@ public class Pedido {
 }
 
 
-//resumo da classe: - controla entrada, regra e consistência = domínio protegido..
-//.. - soma subtotais
-//.. -
+//resumo da classe:
+//- controla entrada, regra e consistência = domínio protegido..
+//- agrupa itens consumidos
+//- representa rodada operacional

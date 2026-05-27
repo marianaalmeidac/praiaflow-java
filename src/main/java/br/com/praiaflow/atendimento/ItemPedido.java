@@ -6,7 +6,7 @@ import br.com.praiaflow.produtos.Produto;
 import java.math.BigDecimal;
 
 //Responsabilidade: Controla financeiro (EXECUÇÃO) INDIVIDUAL/controle de execução.
-public class ItemPedido {
+public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, apenas "isso é um produto".
 
     private Long idItemPedido;
     private Produto produto;
