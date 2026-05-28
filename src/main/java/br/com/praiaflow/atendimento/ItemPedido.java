@@ -116,6 +116,14 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
     public void setIdItemPedido(Long idItemPedido) {
         this.idItemPedido = idItemPedido;
     }
+
+    @Override
+    public String toString() {
+        return "Produto: " + produto +
+                "\nPreço: R$ " + preco +
+                "\nObservacao: " + observacao +
+                "\nStatus: " + status;
+    }
 }
 
 //resumo da classe: - calcula subtotal..

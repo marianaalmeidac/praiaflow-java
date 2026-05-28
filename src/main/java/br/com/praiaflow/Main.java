@@ -23,19 +23,27 @@ public class Main {
         ItemPedido itemPedido = new ItemPedido();
 
         itemPedido.setProduto(caipiroska);
+        caipiroska.setNome("Caipiroska de Morango");
+        caipiroska.setNome("Caipiroska de Kiwi");
 
-        itemPedido.setPreco(new BigDecimal("16.00"));
+        itemPedido.setPreco(new BigDecimal("19.00"));
         itemPedido.setObservacao("COM ADOÇANTE");
 
-       // pedido.fechar();      //teste regra(erro) - fechar item vazio não é permitido
+        //validação de estados:
+        itemPedido.preparar();
+        itemPedido.concluir();
+        itemPedido.entregar();
 
-        pedido.adicionarItem(itemPedido);   //teste regra(erro) - a entidade protege sua própria integridade.
+        //teste regra: (erro: fechar item vazio não é permitido)
+       // pedido.fechar();
 
+        //teste regra: (erro:a entidade protege sua própria integridade)
         pedido.adicionarItem(itemPedido);
+        //pedido.adicionarItem(itemPedido);
 
         comanda.adicionarPedido(pedido);
 
-        System.out.println(itemPedido);
+        System.out.println(pedido);
 
         //itemPedido.cancelar();    //teste regra(negate())
 

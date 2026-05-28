@@ -64,6 +64,12 @@ public class Pedido {
 
         return total;
     }
+
+    @Override
+    public String toString() {
+        return "PEDIDO\n" +
+                "Itens: " + itens;
+    }
 }
 
 
