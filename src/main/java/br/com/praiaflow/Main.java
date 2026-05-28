@@ -11,43 +11,46 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Comanda comanda = new Comanda();  //objeto criado(instanciação - new)
-        comanda.abrir();                  //método
-        System.out.println(comanda);      //impressão
+        //ABERTURA DA COMANDA
+        Comanda comanda = new Comanda();
+        comanda.abrir();
 
+        //ABERTURA DO PEDIDO
         Pedido pedido = new Pedido();
         pedido.abrir();
 
+        //CRIAÇÃO DO PRODUTO
         Caipiroska caipiroska = new Caipiroska();
+        caipiroska.setNome("Caipiroska de Kiwi");
 
+        //CRIAÇÃO DO ITEM DO PEDIDO
         ItemPedido itemPedido = new ItemPedido();
 
         itemPedido.setProduto(caipiroska);
-        caipiroska.setNome("Caipiroska de Morango");
-        caipiroska.setNome("Caipiroska de Kiwi");
-
         itemPedido.setPreco(new BigDecimal("19.00"));
         itemPedido.setObservacao("COM ADOÇANTE");
 
-        //validação de estados:
+        //FLUXO OPERACIONAL DO ITEM
         itemPedido.preparar();
         itemPedido.concluir();
         itemPedido.entregar();
 
-        //teste regra: (erro: fechar item vazio não é permitido)
-       // pedido.fechar();
-
-        //teste regra: (erro:a entidade protege sua própria integridade)
-        pedido.adicionarItem(itemPedido);
+        //ADIÇÃO DO ITEM AO PEDIDO
         pedido.adicionarItem(itemPedido);
 
+        //ADIÇÃO DO PEDIDO À COMANDA
         comanda.adicionarPedido(pedido);
 
+        //IMPRESSÕES
         System.out.println(pedido);
 
-        //itemPedido.cancelar();    //teste regra(negate())
+        System.out.println(comanda);
 
         System.out.println(comanda.calcularTotal());
-
     }
 }
+
+//TESTE DAS REGRAS:
+//Erro: não é permitido fechar pedido vazio -> pedido.fechar();
+//Erro: tentativa de adicionar item duplicado -> pedido.adicionarItem(itemPedido);
+//Erro: cancelamento de item (valor fica negativo) -> itemPedido.cancelar();
