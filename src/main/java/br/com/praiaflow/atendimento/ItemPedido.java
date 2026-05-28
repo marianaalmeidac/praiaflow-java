@@ -14,6 +14,9 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
     private String observacao;
     private StatusItemPedido status;
 
+    public ItemPedido() {
+        this.status = StatusItemPedido.PENDENTE;
+    }
 
     public void preparar() {
         if (this.status != StatusItemPedido.PENDENTE) {
