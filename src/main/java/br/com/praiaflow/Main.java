@@ -39,7 +39,7 @@ public class Main {
 
         //teste regra: (erro:a entidade protege sua própria integridade)
         pedido.adicionarItem(itemPedido);
-        //pedido.adicionarItem(itemPedido);
+        pedido.adicionarItem(itemPedido);
 
         comanda.adicionarPedido(pedido);
 

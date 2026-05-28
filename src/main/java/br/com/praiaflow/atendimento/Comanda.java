@@ -62,9 +62,15 @@ public class Comanda {
         }
 
         return total;
-
+    }
+    @Override
+    public String toString() {
+        return "COMANDA\n" +
+                "Pedidos: " + pedidos +
+                "\nTotal: R$" + calcularTotal();
     }
 }
+
 
 //resumo da classe:
 //-soma pedidos;

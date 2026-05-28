@@ -65,7 +65,7 @@ public abstract class Produto {
 
     @Override
     public String toString() {
-        return "Produto: " + nome;
+        return nome;
     }
 
 }
