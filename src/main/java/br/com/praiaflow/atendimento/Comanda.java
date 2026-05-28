@@ -11,14 +11,12 @@ import java.util.List;
 //Responsabilidade: Controlar o atendimento/fechamento geral da mesa/comanda - COORDENA ATENDIMENTOMENTO
 public class Comanda {
 
-    private Long id;
     private String codigo;
     private TipoComanda tipoComanda;
     private LocalDateTime dataAbertura;
     private LocalDateTime dataFechamento;
     private StatusComanda status;
     private String observacao;
-    private BigDecimal total;
 
     private List<Pedido> pedidos = new ArrayList<>();
 
@@ -68,6 +66,21 @@ public class Comanda {
         return "COMANDA\n" +
                 "Pedidos: " + pedidos +
                 "\nTotal: R$" + calcularTotal();
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(String codigo) {
+
+        if (codigo == null || codigo.isBlank()) {
+            throw new RuntimeException(
+                "Código da comanda deve ser informado."
+            );
+
+        }
+
+        this.codigo = codigo;
     }
 }
 

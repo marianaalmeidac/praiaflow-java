@@ -13,6 +13,7 @@ public class Main {
 
         //ABERTURA DA COMANDA
         Comanda comanda = new Comanda();
+        comanda.setCodigo("GS-10");
         comanda.abrir();
 
         //ABERTURA DO PEDIDO
