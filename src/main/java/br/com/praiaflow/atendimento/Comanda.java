@@ -2,6 +2,8 @@ package br.com.praiaflow.atendimento;
 
 import br.com.praiaflow.enums.StatusComanda;
 import br.com.praiaflow.enums.TipoComanda;
+import br.com.praiaflow.produtos.Adicional;
+import br.com.praiaflow.produtos.Aluguel;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,6 +20,8 @@ public class Comanda {
     private StatusComanda status;
     private String observacao;
 
+    private List<Aluguel> alugueis = new ArrayList<>();
+    private List<Adicional> adicionais = new ArrayList<>();
     private List<Pedido> pedidos = new ArrayList<>();
 
 
@@ -63,9 +67,16 @@ public class Comanda {
     }
     @Override
     public String toString() {
-        return "COMANDA\n" +
-                "Pedidos: " + pedidos +
-                "\nTotal: R$" + calcularTotal();
+
+        String texto = "COMANDA " + codigo;
+
+        for (Pedido pedido : pedidos) {    //comanda percorre os pedidos
+            texto += "\n\n" + pedido;
+        }
+
+        texto += "\n\nTotal: R$ " + calcularTotal();
+
+        return texto;
     }
 
     public String getCodigo() {

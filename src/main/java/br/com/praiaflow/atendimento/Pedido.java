@@ -10,7 +10,8 @@ import java.util.List;
 //Responsabilidade:Controlar a rodada operacional de consumo. - AGRUPADOR OPERACIONAL DE UNIDADES
 public class Pedido {
 
-    private Long id;
+    private Long id;        //como se fosse número da "rodada" e não "id" do pedido.
+    private Integer numeroPedido;
     private LocalDateTime dataPedido;
     private StatusPedido status;
     private Comanda comanda;
@@ -65,10 +66,36 @@ public class Pedido {
         return total;
     }
 
+    public Integer getNumeroPedido() {
+        return numeroPedido;
+    }
+
+    public void setNumeroPedido(Integer numeroPedido) {
+
+        if (numeroPedido == null) {
+            throw new RuntimeException(
+                    "Número do pedido deve ser informado."
+            );
+        }
+
+        if (numeroPedido <= 0) {
+            throw new RuntimeException(
+                    "Número do pedido inválido."
+            );
+        }
+
+        this.numeroPedido = numeroPedido;
+    }
+
     @Override
     public String toString() {
-        return "PEDIDO\n" +
-                "Itens: " + itens;
+
+        String texto = "PEDIDO #" + numeroPedido;
+
+        for (ItemPedido item : itens) {   //Pedido percorre os itens
+            texto += "\n\n" + item;
+        }
+        return texto;
     }
 }
 

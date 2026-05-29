@@ -13,36 +13,41 @@ public class Main {
 
         //ABERTURA DA COMANDA
         Comanda comanda = new Comanda();
-        comanda.setCodigo("GS-10");
+        comanda.setCodigo("GS-12");
         comanda.abrir();
 
         //ABERTURA DO PEDIDO
         Pedido pedido = new Pedido();
+        pedido.setNumeroPedido(1);
         pedido.abrir();
 
         //CRIAÇÃO DO PRODUTO
-        Caipiroska caipiroska = new Caipiroska();
-        caipiroska.setNome("Caipiroska de Kiwi");
+        Caipiroska caipiroskaAbacaxi = new Caipiroska();
+        caipiroskaAbacaxi.setNome("Caipiroska de Abacaxi");
 
         //CRIAÇÃO DO ITEM DO PEDIDO
-        ItemPedido itemPedido = new ItemPedido();
+        ItemPedido item1 = new ItemPedido();
 
-        itemPedido.setProduto(caipiroska);
-        itemPedido.setPreco(new BigDecimal("19.00"));
-        itemPedido.setObservacao("COM ADOÇANTE");
+        item1.setProduto(caipiroskaAbacaxi);
+        item1.setQuantidade(2);
+        item1.setPreco(new BigDecimal("20.00"));
+        item1.setObservacao("COM ADOÇANTE");
 
         //FLUXO OPERACIONAL DO ITEM
-        itemPedido.preparar();
-        itemPedido.concluir();
-        itemPedido.entregar();
+        item1.preparar();
+        item1.concluir();
+        item1.entregar();
 
         //ADIÇÃO DO ITEM AO PEDIDO
-        pedido.adicionarItem(itemPedido);
+        pedido.adicionarItem(item1);
+        Pedido pedido2 = new Pedido();
+        pedido.setNumeroPedido(1);
+        pedido2.abrir();
 
         //ADIÇÃO DO PEDIDO À COMANDA
         comanda.adicionarPedido(pedido);
 
-        //IMPRESSÕES
+        //IMPRESSÕESa
         System.out.println(pedido);
 
         System.out.println(comanda);

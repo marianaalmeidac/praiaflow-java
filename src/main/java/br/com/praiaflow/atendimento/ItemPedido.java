@@ -14,6 +14,8 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
     private String observacao;
     private StatusItemPedido status;
 
+    private Integer quantidade;
+
     public ItemPedido() {
         this.status = StatusItemPedido.PENDENTE;
     }
@@ -57,12 +59,11 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
 
     public BigDecimal calcularTotal() {
 
-        if (this.status == StatusItemPedido.CANCELADO) {
-            return this.preco.negate();
-        }
+        BigDecimal subtotal =
+                this.preco.multiply(BigDecimal.valueOf(this.quantidade));
 
-        return this.preco;
-    }
+        return subtotal;
+}
 
     public StatusItemPedido getStatus() {
         return status;
@@ -87,7 +88,7 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
     }
 
     public void setPreco(BigDecimal preco) {            // a regra nasceu do domínio.
-        if(preco.compareTo(BigDecimal.ZERO) < 0) {     //apenas valores negativos devem ser proibidos, zero pode ser válido
+        if (preco.compareTo(BigDecimal.ZERO) < 0) {     //apenas valores negativos devem ser proibidos, zero pode ser válido
             throw new RuntimeException(
                     "Preço inválido."
             );
@@ -119,10 +120,24 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
 
     @Override
     public String toString() {
-        return "Produto: " + produto +
-                "\nPreço: R$ " + preco +
-                "\nObservacao: " + observacao +
+        return quantidade + "x " + produto +
+                "\nObs: " +  observacao +
+                "\nValor: R$ " + preco +
                 "\nStatus: " + status;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+
+        if (quantidade == null || quantidade <= 0) {    //protege contra null,0 e -1
+            throw new RuntimeException(
+                    "Quantidade deve ser informada."
+            );
+        }
+        this.quantidade = quantidade;
     }
 }
 
