@@ -11,50 +11,76 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //ABERTURA DA COMANDA
+        //COMANDA GS-12
         Comanda comanda = new Comanda();
         comanda.setCodigo("GS-12");
         comanda.abrir();
 
-        //ABERTURA DO PEDIDO
+        //PEDIDO1:
         Pedido pedido = new Pedido();
         pedido.setNumeroPedido(1);
         pedido.abrir();
 
-        //CRIAÇÃO DO PRODUTO
-        Caipiroska caipiroskaAbacaxi = new Caipiroska();
+        //DRINK DO CLIENTE
+        Caipiroska caipiroskaAbacaxi  = new Caipiroska();
         caipiroskaAbacaxi.setNome("Caipiroska de Abacaxi");
 
-        //CRIAÇÃO DO ITEM DO PEDIDO
+        //ITENS DO PEDIDO1
+
         ItemPedido item1 = new ItemPedido();
 
         item1.setProduto(caipiroskaAbacaxi);
         item1.setQuantidade(2);
-        item1.setPreco(new BigDecimal("20.00"));
+        item1.setPreco(new BigDecimal("28.00"));
         item1.setObservacao("COM ADOÇANTE");
 
-        //FLUXO OPERACIONAL DO ITEM
+        //FLUXO ATENDIMENTO1
         item1.preparar();
         item1.concluir();
         item1.entregar();
 
-        //ADIÇÃO DO ITEM AO PEDIDO
+        //PEDIDO1 RECEBE ITEM
         pedido.adicionarItem(item1);
-        Pedido pedido2 = new Pedido();
-        pedido.setNumeroPedido(1);
-        pedido2.abrir();
 
-        //ADIÇÃO DO PEDIDO À COMANDA
+        //COMANDA RECEBE PEDIDO1
         comanda.adicionarPedido(pedido);
 
-        //IMPRESSÕESa
-        System.out.println(pedido);
+        //PEDIDO2:
+        Pedido pedido2 = new Pedido();
+        pedido2.setNumeroPedido(2);
+        pedido2.abrir();
+
+        //DRINKS CLIENTE
+        Caipiroska caipiroskaMorango = new Caipiroska();
+        caipiroskaMorango.setNome("Caipiroska de Morango");
+
+        //ITENS PEDIDO2
+        ItemPedido item2 = new ItemPedido();
+
+        item2.setProduto(caipiroskaMorango);
+        item2.setQuantidade(1);
+        item2.setPreco(new BigDecimal("20.00"));
+        item2.setObservacao("SEM AÇÚCAR");
+
+        //FLUXO ATENDIMENTO2
+        item2.preparar();
+        item2.concluir();
+        item2.entregar();
+
+        //PEDIDO2 RECEBE ITEM
+        pedido2.adicionarItem(item2);
+
+        //COMANDA RECEBE PEDIDO1
+        comanda.adicionarPedido(pedido2);
+
+        //IMPRESSÕES
 
         System.out.println(comanda);
 
-        System.out.println(comanda.calcularTotal());
+        System.out.println();
+        System.out.println("TOTAL: R$ " + comanda.calcularTotal());
     }
-}
+    }
 
 //TESTE DAS REGRAS:
 //Erro: não é permitido fechar pedido vazio -> pedido.fechar();
