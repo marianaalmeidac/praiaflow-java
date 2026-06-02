@@ -1,6 +1,7 @@
 package br.com.praiaflow.enums;
 
-//aqui controla as alterações/cancelamentos individuais dos ITENS
+//Aqui controla as alterações/cancelamentos individuais dos ITENS
+//Representa estados
 public enum StatusItemPedido {
 
     PENDENTE,

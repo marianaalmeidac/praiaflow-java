@@ -2,49 +2,50 @@ package br.com.praiaflow.atendimento;
 
 import br.com.praiaflow.enums.StatusItemPedido;
 import br.com.praiaflow.produtos.Produto;
+import br.com.praiaflow.state.EstadoItemPedido;
+import br.com.praiaflow.state.EstadoPendente;
 
 import java.math.BigDecimal;
 
 //Responsabilidade: Controla financeiro (EXECUÇÃO) INDIVIDUAL/controle de execução.
 public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, apenas "isso é um produto".
 
-    private Long idItemPedido;
+    private Long idItemPedido;   //Preocupação técnica
     private Produto produto;
     private BigDecimal preco;
     private String observacao;
-    private StatusItemPedido status;
-
+    private StatusItemPedido status; //Representa
+    private EstadoItemPedido estado; //Controla comportamento
     private Integer quantidade;
 
-    public ItemPedido() {
-        this.status = StatusItemPedido.PENDENTE;
+    public void setStatus(StatusItemPedido status) {    //Permite alterar a REPRESENTAÇÃO
+        this.status = status;
     }
 
-    public void preparar() {
-        if (this.status != StatusItemPedido.PENDENTE) {
-            throw new RuntimeException(
-                    "Somente itens pendentes podem ser preparados."
-            );
-        }
-        this.status = StatusItemPedido.PREPARANDO;
+    public EstadoItemPedido getEstado() {    //Permite alterar o COMPORTAMENTO
+        return estado;
+    }
+
+    public void setEstado(EstadoItemPedido estado) {
+        this.estado = estado;
+    }
+
+
+    public ItemPedido() {
+        this.status = StatusItemPedido.PENDENTE;  //Representação PENDENTE
+        this.estado = new EstadoPendente();
+    }
+
+    public void preparar() {    //Primeira delegação - essa responsa saiu do ItemPedido
+        estado.preparar(this);
     }
 
     public void concluir() {
-        if (this.status != StatusItemPedido.PREPARANDO) {
-            throw new RuntimeException(
-                    "Somente itens em preparação podem ser concluídos."
-            );
-        }
-        this.status = StatusItemPedido.CONCLUIDO;
+        estado.concluir(this);
     }
 
     public void entregar() {
-        if (this.status != StatusItemPedido.CONCLUIDO) {
-            throw new RuntimeException(
-                    "Somente itens concluídos podem ser entregues."
-            );
-        }
-        this.status = StatusItemPedido.ENTREGUE;
+        estado.entregar(this);
     }
 
     public void cancelar() {
@@ -73,9 +74,9 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
         return observacao;
     }
 
-    public void setObservacao(String observacao) {      //vazio/null faz sentido - não é obrigatório
+    public void setObservacao(String observacao) {      //Vazio/null faz sentido - não é obrigatório
 
-        if (observacao != null && observacao.length() > 255) {  //obs != > protege o domínio contra NullPointerException
+        if (observacao != null && observacao.length() > 255) {  //Obs != > protege o domínio contra NullPointerException
             throw new RuntimeException(
                     "Observação muito longa."
             );
@@ -87,8 +88,8 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {            // a regra nasceu do domínio.
-        if (preco.compareTo(BigDecimal.ZERO) < 0) {     //apenas valores negativos devem ser proibidos, zero pode ser válido
+    public void setPreco(BigDecimal preco) {            //A regra nasceu do domínio.
+        if (preco.compareTo(BigDecimal.ZERO) < 0) {     //Apenas valores negativos devem ser proibidos, zero pode ser válido
             throw new RuntimeException(
                     "Preço inválido."
             );
@@ -132,7 +133,7 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
 
     public void setQuantidade(Integer quantidade) {
 
-        if (quantidade == null || quantidade <= 0) {    //protege contra null,0 e -1
+        if (quantidade == null || quantidade <= 0) {    //Protege contra null,0 e -1
             throw new RuntimeException(
                     "Quantidade deve ser informada."
             );
@@ -141,5 +142,5 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
     }
 }
 
-//resumo da classe: - calcula subtotal..
-//.. -
+//Resumo da classe: - calcula subtotal
+//ItemPedido não decide, ele DELEGA!

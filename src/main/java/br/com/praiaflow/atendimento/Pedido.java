@@ -11,7 +11,7 @@ import java.util.List;
 public class Pedido {
 
     private Long id;        //como se fosse número da "rodada" e não "id" do pedido.
-    private Integer numeroPedido;
+    private Integer numeroPedido;    //(preocupação do negócio)
     private LocalDateTime dataPedido;
     private StatusPedido status;
     private Comanda comanda;
