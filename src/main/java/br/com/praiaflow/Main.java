@@ -14,7 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //ABERTURA DA COMANDA
+        //------------------------------------------|
+        //--------- ABERTURA DA COMANDA ------------|
         System.out.println("=================================");
         System.out.println("      ABERTURA DA COMANDA");
         System.out.println("=================================");
@@ -26,7 +27,9 @@ public class Main {
 
         System.out.println("Comanda " + comanda.getCodigo() + " aberta com sucesso!");
 
-        //ALUGUEL
+
+        //--------------------------------------|
+        //-------------- ALUGUEL ---------------|
         Aluguel aluguel = new Aluguel();
         aluguel.setTipoAluguel(TipoAluguel.KIT_2_PESSOAS);
 
@@ -35,7 +38,9 @@ public class Main {
         System.out.println("Aluguel registrado:");
         System.out.println("KIT_2_PESSOAS");
 
-        //ADICIONAL
+
+        //-----------------------------------------|
+        //-------------- ADICIONAL ----------------|
         Adicional adicional = new Adicional();
 
         adicional.setTipoAdicional(TipoAdicional.CADEIRA);
@@ -46,8 +51,9 @@ public class Main {
         System.out.println("Adicional registrado:");
         System.out.println(adicional.getQuantidade() + "X " + adicional.getTipoAdicional());
 
-        // PEDIDO 001 - DRINK PERSONALIZADO (BUILDER PATTERN)
 
+        //----------------------------------------------------------|
+        //--- PEDIDO 001 - DRINK PERSONALIZADO (BUILDER PATTERN) ---|
         System.out.println("\n=================================");
         System.out.println(" PEDIDO 001 - DRINK PERSONALIZADO");
         System.out.println("=================================");
@@ -92,8 +98,9 @@ public class Main {
 
         System.out.println("\nDrink personalizado criado com sucesso!");
 
-        //PEDIDO 001 - MONTAGEM DO DRINK (BUILDER PATTERN)
 
+        //--------------------------------------------------------|
+        //--- PEDIDO 001 - MONTAGEM DO DRINK (BUILDER PATTERN) ---|
         Pedido pedido1 = new Pedido();
 
         pedido1.setNumeroPedido(1);
@@ -113,8 +120,9 @@ public class Main {
         System.out.println("\nPedido 01 registrado com sucesso!");
         System.out.println("Número do pedido: " + pedido1.getNumeroPedido());
 
-        //FLUXO DO ITEM (STATE PATTERN)
 
+        //----------------------------------------------------|
+        //--------- FLUXO DO ITEM (STATE PATTERN) ------------|
         System.out.println("\n=================================");
         System.out.println(" FLUXO DO ITEM (STATE PATTERN)");
         System.out.println("=================================");
@@ -130,8 +138,9 @@ public class Main {
         item1.entregar();
         System.out.println("Status atual: " + item1.getStatus());
 
-        //PEDIDO 002 - RECEITA PRONTA
 
+        //-----------------------------------------------------|
+        //----------- PEDIDO 002 - RECEITA PRONTA -------------|
         System.out.println("\n=================================");
         System.out.println(" PEDIDO 002 - RECEITA PRONTA");
         System.out.println("=================================");
@@ -158,8 +167,9 @@ public class Main {
         System.out.println("Pedido 02 registrado com sucesso!");
         System.out.println("Receita pronta adicionada ao sistema.");
 
-        //RESUMO DA COMANDA
 
+        //---------------------------------------------------|
+        //--------------- RESUMO DA COMANDA -----------------|
         System.out.println("\n=================================");
         System.out.println(" RESUMO DA COMANDA");
         System.out.println("=================================");
@@ -176,16 +186,18 @@ public class Main {
         System.out.println("Pedido 01 - Drink Personalizado");
         System.out.println("Pedido 02 - Receita Pronta");
 
-        //TOTAL GERAL
 
+        //-------------------------------------------|
+        //------------- TOTAL GERAL -----------------|
         System.out.println("\n=================================");
         System.out.println(" TOTAL GERAL");
         System.out.println("=================================");
 
         System.out.println("Valor total da comanda: R$ " + comanda.calcularTotal());
 
-        //TESTE DE REGRA 01 - PEDIDO VAZIO
 
+        //--------------------------------------------------------|
+        //--------- TESTE DE REGRA 01 - PEDIDO VAZIO -------------|
         System.out.println("\n=================================");
         System.out.println(" TESTE DE REGRA 01 - PEDIDO VAZIO");
         System.out.println("=================================");
@@ -204,8 +216,9 @@ public class Main {
             System.out.println("Erro: " + e.getMessage());
         }
 
-        //TESTE DE REGRA 02 - PEDIDO CONCLUÍDO
 
+        //----------------------------------------------------------|
+        //--------- TESTE DE REGRA 02 - PEDIDO CONCLUÍDO -----------|
         System.out.println("\n=================================");
         System.out.println(" TESTE DE REGRA 02 - PEDIDO CONCLUÍDO");
         System.out.println("=================================");
@@ -233,8 +246,9 @@ public class Main {
             System.out.println("Erro: " + e.getMessage());
         }
 
-        //TESTE DE REGRA 03 - CANCELAMENTO
 
+        //--------------------------------------------------------|
+        //--------- TESTE DE REGRA 03 - CANCELAMENTO -------------|
         System.out.println("\n=================================");
         System.out.println(" TESTE DE REGRA 03 - CANCELAMENTO");
         System.out.println("=================================");
