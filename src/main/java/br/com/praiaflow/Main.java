@@ -186,9 +186,77 @@ public class Main {
 
         //TESTE DE REGRA 01 - PEDIDO VAZIO
 
-        //TESTE DE REGRA 02 - ITEM DUPLICADO
+        System.out.println("\n=================================");
+        System.out.println(" TESTE DE REGRA 01 - PEDIDO VAZIO");
+        System.out.println("=================================");
+
+        try {
+
+            Pedido pedidoVazio = new Pedido();
+
+            pedidoVazio.setNumeroPedido(3);
+            pedidoVazio.abrir();
+
+            pedidoVazio.fechar();
+
+        } catch (Exception e) {
+
+            System.out.println("Erro: " + e.getMessage());
+        }
+
+        //TESTE DE REGRA 02 - PEDIDO CONCLUÍDO
+
+        System.out.println("\n=================================");
+        System.out.println(" TESTE DE REGRA 02 - PEDIDO CONCLUÍDO");
+        System.out.println("=================================");
+
+        try {
+
+            Pedido pedidoTeste = new Pedido();
+
+            pedidoTeste.setNumeroPedido(4);
+            pedidoTeste.abrir();
+
+            ItemPedido itemTeste = new ItemPedido();
+
+            itemTeste.setProduto(caipiroskaMorango);
+            itemTeste.setQuantidade(1);
+            itemTeste.setPreco(new BigDecimal("20.00"));
+
+            pedidoTeste.adicionarItem(itemTeste);
+
+            pedidoTeste.fechar();
+
+            pedidoTeste.adicionarItem(itemTeste);
+
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
 
         //TESTE DE REGRA 03 - CANCELAMENTO
 
+        System.out.println("\n=================================");
+        System.out.println(" TESTE DE REGRA 03 - CANCELAMENTO");
+        System.out.println("=================================");
+
+        try {
+
+            ItemPedido itemCancelado = new ItemPedido();
+
+            itemCancelado.setProduto(caipiroskaMorango);
+            itemCancelado.setQuantidade(1);
+            itemCancelado.setPreco(new BigDecimal("20.00"));
+
+            System.out.println("Status atual: " + itemCancelado.getStatus());
+
+            itemCancelado.cancelar();
+
+            System.out.println("Status atual: " + itemCancelado.getStatus());
+
+        } catch (Exception e) {
+
+            System.out.println("Erro: " + e.getMessage());
+
+        }
     }
 }
