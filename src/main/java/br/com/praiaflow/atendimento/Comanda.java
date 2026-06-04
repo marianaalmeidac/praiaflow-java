@@ -36,7 +36,6 @@ public class Comanda {
 
         this.status = StatusComanda.FECHADA;
         this.dataFechamento = LocalDateTime.now();
-
     }
 
     public void adicionarPedido(Pedido pedido) {
@@ -48,9 +47,25 @@ public class Comanda {
             );
 
         }
-
         this.pedidos.add(pedido);
+    }
 
+    public void adicionarAlguel(Aluguel aluguel) {
+        if (this.status == StatusComanda.FECHADA) {
+            throw new RuntimeException(
+                    "Não é possível adicionar aluguel a uma comanda fechada."
+            );
+        }
+        this.alugueis.add(aluguel);
+    }
+
+    public void adicionarAdicional(Adicional adicional) {
+        if (this.status == StatusComanda.FECHADA) {
+            throw new RuntimeException(
+                    "Não é possível adicionar adicional a uma comanda fechada."
+            );
+        }
+        this.adicionais.add(adicional);
     }
 
     public BigDecimal calcularTotal() {
@@ -62,7 +77,6 @@ public class Comanda {
             total = total.add(pedido.calcularTotal());
 
         }
-
         return total;
     }
     @Override
@@ -90,7 +104,6 @@ public class Comanda {
             );
 
         }
-
         this.codigo = codigo;
     }
 }
