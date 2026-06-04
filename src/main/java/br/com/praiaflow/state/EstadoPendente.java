@@ -14,12 +14,22 @@ public class EstadoPendente implements EstadoItemPedido {
 
     @Override
     public void concluir(ItemPedido item){   //Regra não permite ação
-
+        throw new RuntimeException(
+                "Somente itens em preparação podem ser concluídos."
+        );
     }
 
     @Override
     public void entregar(ItemPedido item){   //Regra não permite ação
+        throw new RuntimeException(
+                "Somente itens concluídos conseguem ser entregues."  //A mensagem fala a linguagem do domínio !DICA!
+        );
+    }
 
+    @Override
+    public void cancelar(ItemPedido item){
+            item.setStatus(StatusItemPedido.CANCELADO);
+            item.setEstado(new EstadoCancelado());
     }
 }
 

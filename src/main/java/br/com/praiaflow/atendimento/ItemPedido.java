@@ -31,7 +31,7 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
     }
 
 
-    public ItemPedido() {
+    public ItemPedido() {    //Construtor
         this.status = StatusItemPedido.PENDENTE;  //Representação PENDENTE
         this.estado = new EstadoPendente();
     }
@@ -49,13 +49,7 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
     }
 
     public void cancelar() {
-
-        if (this.status == StatusItemPedido.CANCELADO) {
-            throw new RuntimeException(
-                    "Item já cancelado."
-            );
-        }
-        this.status = StatusItemPedido.CANCELADO;
+        estado.cancelar(this);
     }
 
     public BigDecimal calcularTotal() {

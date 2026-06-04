@@ -10,4 +10,10 @@ public interface EstadoItemPedido {
 
     void entregar(ItemPedido item);
 
+    void cancelar(ItemPedido item);
+
 }
+
+//Cada estado tem UMA responsabilidade principal;
+//Alguns estados também podem permitir operações secundárias, como o CANCELAMENTO.
+//Sobre o State: encapsula COMPORTAMENTO e REMOVE condicionais.

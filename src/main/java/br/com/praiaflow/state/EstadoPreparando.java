@@ -7,6 +7,9 @@ public class EstadoPreparando implements EstadoItemPedido {
 
     @Override
     public void preparar(ItemPedido item){   //Regra não permite ação
+        throw new RuntimeException(
+                "Somente itens pendentes podem ser preparados."  //Mensagem informa que já passou da etapa 'Pendente'
+        );
     }
 
     @Override
@@ -17,6 +20,14 @@ public class EstadoPreparando implements EstadoItemPedido {
 
     @Override
     public void entregar(ItemPedido item) {  //Regra não permite ação
+        throw new RuntimeException(
+                "Somente itens concluídos conseguem ser entregues."
+        );
+    }
 
+    @Override
+    public void cancelar(ItemPedido item) {
+        item.setStatus(StatusItemPedido.CANCELADO);
+        item.setEstado(new EstadoCancelado());
     }
 }
