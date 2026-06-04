@@ -1,10 +1,14 @@
 package br.com.praiaflow;
 
 import br.com.praiaflow.atendimento.Comanda;
+import br.com.praiaflow.atendimento.ItemPedido;
+import br.com.praiaflow.atendimento.Pedido;
 import br.com.praiaflow.builder.DrinkBuilder;
 import br.com.praiaflow.enums.TipoAdicional;
 import br.com.praiaflow.enums.TipoAluguel;
 import br.com.praiaflow.produtos.*;
+
+import java.math.BigDecimal;
 
 public class Main {
 
@@ -35,11 +39,12 @@ public class Main {
         Adicional adicional = new Adicional();
 
         adicional.setTipoAdicional(TipoAdicional.CADEIRA);
+        adicional.setQuantidade(2);
 
         comanda.adicionarAdicional(adicional);
 
         System.out.println("Adicional registrado:");
-        System.out.println("CADEIRA");
+        System.out.println(adicional.getQuantidade() + "X " + adicional.getTipoAdicional());
 
         // PEDIDO 001 - DRINK PERSONALIZADO (BUILDER PATTERN)
 
@@ -56,7 +61,7 @@ public class Main {
 
         builder.comDestilado(vodka);
 
-        System.out.println("Destilado registrado:");
+        System.out.println("\nDestilado registrado:");
         System.out.println(vodka.getNome());
 
         Ingrediente abacaxi = new Ingrediente();
@@ -68,7 +73,7 @@ public class Main {
 
         builder.adicionarIngrediente(itemAbacaxi);
 
-        System.out.println("Ingrediente registrado:");
+        System.out.println("\nIngrediente registrado:");
         System.out.println(abacaxi.getNome());
 
         Ingrediente acucar = new Ingrediente();
@@ -80,7 +85,7 @@ public class Main {
 
         builder.adicionarIngrediente(itemAcucar);
 
-        System.out.println("Ingrediente registrado:");
+        System.out.println("\nIngrediente registrado:");
         System.out.println(acucar.getNome());
 
         Drink drinkPersonalizado = builder.build();
@@ -89,14 +94,95 @@ public class Main {
 
         //PEDIDO 001 - MONTAGEM DO DRINK (BUILDER PATTERN)
 
+        Pedido pedido1 = new Pedido();
+
+        pedido1.setNumeroPedido(1);
+        pedido1.abrir();
+
+        ItemPedido item1 = new ItemPedido();
+
+        item1.setProduto(drinkPersonalizado);
+        item1.setQuantidade(2);
+        item1.setPreco(new BigDecimal("23.00"));
+        item1.setObservacao("Com adoçante");
+
+        pedido1.adicionarItem(item1);
+
+        comanda.adicionarPedido(pedido1);
+
+        System.out.println("\nPedido 01 registrado com sucesso!");
+        System.out.println("Número do pedido: " + pedido1.getNumeroPedido());
 
         //FLUXO DO ITEM (STATE PATTERN)
 
+        System.out.println("\n=================================");
+        System.out.println(" FLUXO DO ITEM (STATE PATTERN)");
+        System.out.println("=================================");
+
+        System.out.println("Status atual: " + item1.getStatus());
+
+        item1.preparar();
+        System.out.println("Status atual: " + item1.getStatus());
+
+        item1.concluir();
+        System.out.println("Status atual: " + item1.getStatus());
+
+        item1.entregar();
+        System.out.println("Status atual: " + item1.getStatus());
+
         //PEDIDO 002 - RECEITA PRONTA
+
+        System.out.println("\n=================================");
+        System.out.println(" PEDIDO 002 - RECEITA PRONTA");
+        System.out.println("=================================");
+
+        Caipiroska caipiroskaMorango = new Caipiroska();
+        caipiroskaMorango.setNome("Caipiroska de Morango");
+
+        Pedido pedido2 = new Pedido();
+
+        pedido2.setNumeroPedido(2);
+        pedido2.abrir();
+
+        ItemPedido item2 = new ItemPedido();
+
+        item2.setProduto(caipiroskaMorango);
+        item2.setQuantidade(1);
+        item2.setPreco(new BigDecimal("20.00"));
+        item2.setObservacao("Sem açúcar");
+
+        pedido2.adicionarItem(item2);
+
+        comanda.adicionarPedido(pedido2);
+
+        System.out.println("Pedido 02 registrado com sucesso!");
+        System.out.println("Receita pronta adicionada ao sistema.");
 
         //RESUMO DA COMANDA
 
+        System.out.println("\n=================================");
+        System.out.println(" RESUMO DA COMANDA");
+        System.out.println("=================================");
+
+        System.out.println("Comanda: " + comanda.getCodigo());
+
+        System.out.println("\nAluguel:");
+        System.out.println(aluguel.getTipoAluguel());
+
+        System.out.println("\nAdicionais:");
+        System.out.println(adicional.getQuantidade() + "X " + adicional.getTipoAdicional());
+
+        System.out.println("\nPedidos registrados:");
+        System.out.println("Pedido 01 - Drink Personalizado");
+        System.out.println("Pedido 02 - Receita Pronta");
+
         //TOTAL GERAL
+
+        System.out.println("\n=================================");
+        System.out.println(" TOTAL GERAL");
+        System.out.println("=================================");
+
+        System.out.println("Valor total da comanda: R$ " + comanda.calcularTotal());
 
         //TESTE DE REGRA 01 - PEDIDO VAZIO
 
