@@ -1,143 +1,82 @@
-# PraiaFlow 
+# PraiaFlow
 
-Sistema de gerenciamento de comandas e pedidos para ambientes de praia e bar.
+## Sobre o Projeto
 
----
+O PraiaFlow é um sistema desenvolvido em Java para apoiar a gestão operacional de quiosques e barracas de praia. O projeto foi construído com foco na modelagem orientada a objetos, aplicando conceitos de domínio, encapsulamento, regras de negócio e padrões de projeto.
 
-# Sobre o projeto
-
-O PraiaFlow é um projeto desenvolvido em Java com foco na prática de Programação Orientada a Objetos, modelagem de domínio e padrões de projeto.
-
-A ideia do sistema surgiu pensando na rotina de atendimento de ambientes de praia e bar, principalmente no controle de comandas, pedidos e drinks.
-
-O projeto está sendo utilizado como prática acadêmica nas disciplinas de:
-
-* Padrões de Projeto GOF
-* Análise de Sistemas
+O sistema permite controlar comandas, aluguéis, adicionais e pedidos realizados pelos clientes durante o atendimento.
 
 ---
 
-# Objetivo
+## Objetivos
 
-O principal objetivo do projeto é evoluir conhecimentos em:
-
-* orientação a objetos;
-* organização de código;
-* modelagem de sistemas;
-* análise de domínio;
-* arquitetura de software.
-
-Além disso, o sistema busca representar um cenário operacional mais próximo da realidade.
+* Organizar o atendimento realizado em barracas e quiosques de praia.
+* Controlar pedidos e consumo dos clientes.
+* Gerenciar aluguéis de estruturas como guarda-sóis e kits de cadeiras.
+* Registrar adicionais solicitados durante a permanência do cliente.
+* Aplicar conceitos de Programação Orientada a Objetos e padrões de projeto.
 
 ---
 
-# Funcionalidades atuais
+## Modelagem do Domínio
 
-## Comandas e pedidos
-
-* gerenciamento de comandas;
-* controle de pedidos;
-* controle de itens do pedido;
-* fluxo operacional do atendimento.
-
-## Drinks
-
-* drinks personalizados;
-* receitas pré-definidas;
-* controle de ingredientes;
-* controle de destilados;
-* adicionais.
-
-## Operação
-
-* controle de estados do item do pedido;
-* validação de transições;
-* controle financeiro de cancelamentos.
-
----
-
-# Estrutura do projeto
+A modelagem da comanda foi refinada para representar melhor a operação real da praia.
 
 ```text
-br.com.praiaflow
-│
-├── atendimento
-├── produtos
-├── builder
-└── enums
+Comanda
+├── Aluguéis
+├── Adicionais
+└── Pedidos
 ```
 
----
-
-# Conceitos utilizados
-
-Durante o desenvolvimento do projeto estão sendo praticados conceitos como:
-
-* abstração;
-* encapsulamento;
-* herança;
-* composição;
-* responsabilidade de classes;
-* separação de responsabilidades.
+Dessa forma, o aluguel inicial da estrutura, os adicionais solicitados posteriormente e os pedidos de consumo são tratados como elementos distintos dentro do atendimento.
 
 ---
 
-# Padrões GOF utilizados
+## Padrões de Projeto Utilizados
 
-## Builder
+### Builder Pattern
 
-Utilizado na montagem gradual dos drinks.
+O padrão Builder foi aplicado para a montagem de drinks personalizados.
 
-### Classe:
+Conforme a montagem dos drinks foi ficando mais detalhada, essa responsabilidade foi centralizada na classe `DrinkBuilder`, responsável por construir bebidas dinamicamente a partir de destilados, ingredientes e adicionais.
 
-```java
-DrinkBuilder
-```
+### State Pattern
 
----
+O padrão State foi aplicado na entidade `ItemPedido`.
 
-## State
+Antes, o ItemPedido utilizava condicionais para controlar o comportamento. Após a aplicação do State Pattern, ele passou a delegar o comportamento para o estado atual.
 
-Aplicado no controle de estados do `ItemPedido`.
+Fluxo principal:
 
-Estados atuais:
+PENDENTE → PREPARANDO → CONCLUIDO → ENTREGUE
 
-* PENDENTE
-* PREPARANDO
-* CONCLUIDO
-* ENTREGUE
-* CANCELADO
+Fluxo alternativo:
+
+PENDENTE → CANCELADO
 
 ---
 
-## Strategy
+## Regras de Negócio
 
-Planejado para futuras estratégias de cálculo operacional.
-
----
-
-# Evolução do domínio
-
-Inicialmente o projeto possuía apenas a ideia de drinks personalizados.
-
-Durante a evolução da modelagem, surgiu a necessidade de representar também receitas pré-definidas da casa para agilizar o atendimento em horários de maior movimento.
-
-Essa evolução permitiu separar:
-
-* configuração de receitas;
-* operação do atendimento.
+* Não é possível concluir um pedido sem itens.
+* Não é possível adicionar itens a um pedido concluído.
+* O produto do item é obrigatório.
+* A quantidade deve ser maior que zero.
+* O preço não pode ser negativo.
+* O código da comanda deve ser informado.
 
 ---
 
-# Tecnologias utilizadas
+## Tecnologias Utilizadas
 
 * Java
+* Maven
 * IntelliJ IDEA
-* Git
-* GitHub
+* Programação Orientada a Objetos (POO)
+* Builder Pattern
+* State Pattern
 
 ---
 
-# Desenvolvido por
-
-Mariana Almeida
+Projeto desenvolvido por Mariana Almeida como atividade acadêmica para estudo e aplicação prática de Programação Orientada a Objetos, Modelagem de Domínio e Padrões de Projeto.
