@@ -7,16 +7,17 @@ import br.com.praiaflow.state.EstadoPendente;
 
 import java.math.BigDecimal;
 
-//Responsabilidade: Controla financeiro (EXECUÇÃO) INDIVIDUAL/controle de execução.
-public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, apenas "isso é um produto".
+//Responsabilidade: Representa a unidade individual consumida + Info financeiras + Fluxo operacional.
+public class ItemPedido { //Não precisa saber o tipo concreto, apenas "isso é um produto".
 
-    private Long idItemPedido;   //Preocupação técnica
+    private Long idItemPedido; //Preocupação técnica.
     private Produto produto;
     private BigDecimal preco;
     private String observacao;
-    private StatusItemPedido status; //Representa
-    private EstadoItemPedido estado; //Controla comportamento
+    private StatusItemPedido status; //Representação visual do estado [enum].
+    private EstadoItemPedido estado; //Comportamento [controla comportamento associado ao estado atual].
     private Integer quantidade;
+
 
     public void setStatus(StatusItemPedido status) {    //Permite alterar a REPRESENTAÇÃO
         this.status = status;
@@ -30,12 +31,13 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
         this.estado = estado;
     }
 
-
-    public ItemPedido() {    //Construtor
-        this.status = StatusItemPedido.PENDENTE;  //Representação PENDENTE
-        this.estado = new EstadoPendente();
+    //Representação e Comportamento são inicializados juntos.
+    public ItemPedido() { //Não decide se pode preparar [ele delega a decisão para o estado atual].
+        this.status = StatusItemPedido.PENDENTE;
+        this.estado = new EstadoPendente(); //todos itens nascem com estado PENDENTE.
     }
 
+    //Antes, essas operações eram controladas por condicionais [veirifcando status do item].
     public void preparar() {    //Primeira delegação - essa responsa saiu do ItemPedido
         estado.preparar(this);
     }
@@ -68,9 +70,9 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
         return observacao;
     }
 
-    public void setObservacao(String observacao) {      //Vazio/null faz sentido - não é obrigatório
+    public void setObservacao(String observacao) { //Vazio[null] faz sentido - não é obrigatório
 
-        if (observacao != null && observacao.length() > 255) {  //Obs != > protege o domínio contra NullPointerException
+        if (observacao != null && observacao.length() > 255) { //Obs != > protege o domínio contra NullPointerException
             throw new RuntimeException(
                     "Observação muito longa."
             );
@@ -82,8 +84,8 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {            //A regra nasceu do domínio.
-        if (preco.compareTo(BigDecimal.ZERO) < 0) {     //Apenas valores negativos devem ser proibidos, zero pode ser válido
+    public void setPreco(BigDecimal preco) { //A regra nasceu do domínio.
+        if (preco.compareTo(BigDecimal.ZERO) < 0) { //Apenas valores negativos devem ser proibidos, zero pode ser válido
             throw new RuntimeException(
                     "Preço inválido."
             );
@@ -136,5 +138,6 @@ public class ItemPedido {   //o ItemPedido não precisa saber o tipo concreto, a
     }
 }
 
-//Resumo da classe: - calcula subtotal
-//ItemPedido não decide, ele DELEGA!
+//Resumo da classe: ItemPedido não decide, ele DELEGA!
+//ItemPedido utilizava condicionais para controlar comportamento e agora após o state,
+//ele passou a delegar comportamento para o estado atual.

@@ -20,26 +20,24 @@ public class Comanda {
     private StatusComanda status;
     private String observacao;
 
+    //Separação conceitual de atendimento: [elementos distintos possuem responsabilidades distintas dentro da operação]
     private List<Aluguel> alugueis = new ArrayList<>();
     private List<Adicional> adicionais = new ArrayList<>();
     private List<Pedido> pedidos = new ArrayList<>();
 
 
     public void abrir() {
-
         this.status = StatusComanda.ABERTA;
-        this.dataAbertura = LocalDateTime.now();    //ciclo de vidaa operacional
+        this.dataAbertura = LocalDateTime.now();
 
     }
 
     public void fechar() {
-
         this.status = StatusComanda.FECHADA;
         this.dataFechamento = LocalDateTime.now();
     }
 
     public void adicionarPedido(Pedido pedido) {
-
         if (this.status == StatusComanda.FECHADA) {       //o comportamento vai depender do estado da entidade
 
             throw new RuntimeException(
@@ -97,7 +95,6 @@ public class Comanda {
         return codigo;
     }
     public void setCodigo(String codigo) {
-
         if (codigo == null || codigo.isBlank()) {
             throw new RuntimeException(
                 "Código da comanda deve ser informado."
@@ -109,8 +106,9 @@ public class Comanda {
 }
 
 
-//resumo da classe:
-//-soma pedidos;
-//-possui vida própria simples;
-//-não depende rigidamente dos estados dos itens;
-//-o impacto financeiro final acontece na Comanda.
+//Resumo da classe:
+//- coordena o atendimento geral;
+//- separa aluguel, adicionais e pedidos;
+//- agrega os valores dos pedidos;
+//- controla abertura e fechamento da operação;
+//- representa o ponto central do atendimento.
