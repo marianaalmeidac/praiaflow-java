@@ -198,7 +198,7 @@ public class Main {
 
         //--------------------------------------------------------|
         //--------- TESTE DE REGRA 01 - PEDIDO VAZIO -------------|
-        /*
+
         System.out.println("\n=================================");
         System.out.println(" TESTE DE REGRA 01 - PEDIDO VAZIO");
         System.out.println("=================================");
@@ -216,9 +216,9 @@ public class Main {
 
             System.out.println("Erro: " + e.getMessage());
         }
-        */
 
-        /*
+
+
         //----------------------------------------------------------|
         //--------- TESTE DE REGRA 02 - PEDIDO CONCLUÍDO -----------|
         System.out.println("\n=================================");
@@ -247,9 +247,9 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }
-        */
 
-        /*
+
+
         //--------------------------------------------------------|
         //--------- TESTE DE REGRA 03 - CANCELAMENTO -------------|
         System.out.println("\n=================================");
@@ -277,6 +277,5 @@ public class Main {
         }
     }
 
-         */
+
     }
-}

@@ -2,6 +2,7 @@ package br.com.praiaflow.state;
 
 import br.com.praiaflow.atendimento.ItemPedido;
 
+//Interface representa comportamento dos estados.
 public interface EstadoItemPedido {
 
     void preparar(ItemPedido item);

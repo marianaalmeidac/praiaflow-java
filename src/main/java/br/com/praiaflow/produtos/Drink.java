@@ -18,7 +18,6 @@ public abstract class Drink extends Produto {
         this.destilado = destilado;
     }
 
-
     public List<ItemIngrediente> getIngredientes() {
         return ingredientes;
     }

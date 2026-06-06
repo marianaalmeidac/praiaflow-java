@@ -94,6 +94,7 @@ public class Comanda {
     public String getCodigo() {
         return codigo;
     }
+
     public void setCodigo(String codigo) {
         if (codigo == null || codigo.isBlank()) {
             throw new RuntimeException(

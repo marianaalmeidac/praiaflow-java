@@ -2,7 +2,7 @@ package br.com.praiaflow.builder;
 
 import br.com.praiaflow.produtos.*;
 
-//Responsabilidade: Padrão aplicado para organizar montagem de drinks.
+//Responsabilidade centralizada: Padrão aplicado para organizar montagem de drinks.
 public class DrinkBuilder {
 
     private Drink drink;
